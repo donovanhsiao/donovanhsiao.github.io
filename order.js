@@ -16,16 +16,20 @@ const portfolioData = {
                 </p>
                 <div class="info-grid">
                     <div class="info-item">
-                        <strong>Location:</strong> San Francisco, CA
+                        <strong>Location</strong>
+                        <div>San Francisco, CA</div>
                     </div>
                     <div class="info-item">
-                        <strong>Education:</strong> BS in Computer Science
+                        <strong>Education</strong>
+                        <div>BS in Computer Science</div>
                     </div>
                     <div class="info-item">
-                        <strong>Interests:</strong> Web Development, AI/ML, Open Source
+                        <strong>Interests</strong>
+                        <div>Web Dev, AI/ML, Open Source</div>
                     </div>
                     <div class="info-item">
-                        <strong>Languages:</strong> English, Mandarin
+                        <strong>Languages</strong>
+                        <div>English, Mandarin</div>
                     </div>
                 </div>
             </div>
@@ -298,11 +302,11 @@ window.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Display ordered items
-    const itemsHTML = cart.map(item => {
+    // Display ordered items with staggered animation
+    const itemsHTML = cart.map((item, index) => {
         const data = portfolioData[item];
         return `
-            <div class="order-item">
+            <div class="order-item" style="animation-delay: ${index * 0.15}s">
                 <div class="order-item-header">
                     <h2>${data.title}</h2>
                 </div>
@@ -312,4 +316,69 @@ window.addEventListener('DOMContentLoaded', () => {
     }).join('');
 
     orderContent.innerHTML = itemsHTML;
+    
+    // Add scroll reveal animations
+    addScrollReveal();
+    
+    // Confetti effect on load
+    createConfetti();
 });
+
+// Scroll reveal animation for order items
+function addScrollReveal() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.order-item').forEach(item => {
+        observer.observe(item);
+    });
+}
+
+// Create confetti effect
+function createConfetti() {
+    const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#43e97b'];
+    const confettiCount = 50;
+    
+    for (let i = 0; i < confettiCount; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.style.position = 'fixed';
+            confetti.style.width = '10px';
+            confetti.style.height = '10px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.top = '-10px';
+            confetti.style.opacity = '1';
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.pointerEvents = 'none';
+            confetti.style.zIndex = '9999';
+            confetti.style.transition = 'all 3s ease-out';
+            
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => {
+                confetti.style.top = '100vh';
+                confetti.style.opacity = '0';
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+            }, 50);
+            
+            setTimeout(() => {
+                if (confetti.parentNode) {
+                    document.body.removeChild(confetti);
+                }
+            }, 3000);
+        }, i * 30);
+    }
+}
