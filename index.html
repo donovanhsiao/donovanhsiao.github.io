@@ -3,86 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Portfolio Bistro | Order Your Info</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
-            <h1 class="logo">My Portfolio</h1>
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="experiences.html">Experiences</a></li>
-            </ul>
+            <h1 class="logo">🍽️ Portfolio Bistro</h1>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒 Cart (<span id="cart-count">0</span>)
+            </div>
         </div>
     </nav>
 
     <header class="hero">
         <div class="container">
-            <h1>Hi, I'm Donovan</h1>
-            <p class="subtitle">Developer | Designer | Creator</p>
+            <h1>Welcome to Donovan's Portfolio Bistro</h1>
+            <p class="subtitle">Serving Fresh Info Since 2025</p>
             <p class="description">
-                Welcome to my portfolio! I'm passionate about building great software 
-                and creating meaningful digital experiences.
+                Browse our menu and order exactly what you'd like to know about me!
+                Add items to your cart and place your order.
             </p>
-            <div class="cta-buttons">
-                <a href="experiences.html" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-            </div>
         </div>
     </header>
 
-    <section id="about" class="section">
+    <section id="menu" class="section">
         <div class="container">
-            <h2>About Me</h2>
-            <p>
-                I'm a passionate developer with experience in web development, 
-                software engineering, and design. I love creating solutions that 
-                make a difference and learning new technologies along the way.
-            </p>
-        </div>
-    </section>
+            <h2>📋 Our Menu</h2>
+            <p class="menu-subtitle">Select what you'd like to learn about Donovan</p>
+            
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <h3>🍕 About Me</h3>
+                        <span class="price">Free</span>
+                    </div>
+                    <p class="menu-description">
+                        Get to know who I am, my background, and what drives my passion for development.
+                    </p>
+                    <div class="menu-tags">
+                        <span class="tag">Biography</span>
+                        <span class="tag">Interests</span>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('about')">
+                        Add to Cart
+                    </button>
+                </div>
 
-    <section id="skills" class="section section-gray">
-        <div class="container">
-            <h2>Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3>Frontend</h3>
-                    <p>HTML, CSS, JavaScript, React</p>
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <h3>💼 Experience</h3>
+                        <span class="price">Free</span>
+                    </div>
+                    <p class="menu-description">
+                        My professional journey, work history, and the roles I've held throughout my career.
+                    </p>
+                    <div class="menu-tags">
+                        <span class="tag">Work History</span>
+                        <span class="tag">Timeline</span>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('experience')">
+                        Add to Cart
+                    </button>
                 </div>
-                <div class="skill-card">
-                    <h3>Backend</h3>
-                    <p>Node.js, Python, Java</p>
+
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <h3>🚀 Projects</h3>
+                        <span class="price">Free</span>
+                    </div>
+                    <p class="menu-description">
+                        Showcase of my best work, side projects, and creative solutions I've built.
+                    </p>
+                    <div class="menu-tags">
+                        <span class="tag">Portfolio</span>
+                        <span class="tag">Demos</span>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('projects')">
+                        Add to Cart
+                    </button>
                 </div>
-                <div class="skill-card">
-                    <h3>Tools</h3>
-                    <p>Git, VS Code, Docker</p>
+
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <h3>⚡ Skills</h3>
+                        <span class="price">Free</span>
+                    </div>
+                    <p class="menu-description">
+                        Technical skills, tools, and technologies I'm proficient in across the stack.
+                    </p>
+                    <div class="menu-tags">
+                        <span class="tag">Tech Stack</span>
+                        <span class="tag">Expertise</span>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('skills')">
+                        Add to Cart
+                    </button>
                 </div>
-                <div class="skill-card">
-                    <h3>Design</h3>
-                    <p>Figma, Adobe XD, UI/UX</p>
+
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <h3>📄 Resume</h3>
+                        <span class="price">Free</span>
+                    </div>
+                    <p class="menu-description">
+                        Download my complete resume with education, certifications, and detailed experience.
+                    </p>
+                    <div class="menu-tags">
+                        <span class="tag">PDF</span>
+                        <span class="tag">Complete</span>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('resume')">
+                        Add to Cart
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="section">
-        <div class="container">
-            <h2>Get In Touch</h2>
-            <p>I'd love to hear from you! Feel free to reach out.</p>
-            <div class="contact-links">
-                <a href="mailto:your.email@example.com" class="contact-link">Email</a>
-                <a href="https://github.com/yourusername" target="_blank" class="contact-link">GitHub</a>
-                <a href="https://linkedin.com/in/yourusername" target="_blank" class="contact-link">LinkedIn</a>
-            </div>
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Your Order</h2>
+            <button class="close-cart" onclick="toggleCart()">✕</button>
         </div>
-    </section>
+        <div id="cart-items" class="cart-items">
+            <p class="empty-cart">Your cart is empty. Add some items from the menu!</p>
+        </div>
+        <div class="cart-footer">
+            <button class="place-order-btn" onclick="placeOrder()" id="place-order-btn" disabled>
+                Place Order
+            </button>
+        </div>
+    </div>
+
+    <div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 [Your Name]. All rights reserved.</p>
+            <p>&copy; 2025 Donovan Hsiao. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
