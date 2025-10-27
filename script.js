@@ -203,9 +203,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Download resume button (placeholder)
-    document.querySelector('.download-btn').addEventListener('click', () => {
-        alert('Download functionality would go here! Add your actual resume PDF.');
+    // Download resume button
+    document.getElementById('download-resume-btn').addEventListener('click', () => {
+        const link = document.createElement('a');
+        link.href = 'files/Donovan_Hsiao_resume.pdf';
+        link.download = 'Donovan_Hsiao_resume.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     });
 });
 

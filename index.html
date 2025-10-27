@@ -187,58 +187,17 @@
         <div class="container">
             <h2>📄 Resume</h2>
             <div class="section-content">
-                <div class="resume-header">
-                    <h3>Your Name</h3>
-                    <p>Software Engineer | Full Stack Developer</p>
-                    <div class="contact-info">
-                        <span>📧 email@example.com</span>
-                        <span>🔗 linkedin.com/in/yourprofile</span>
-                        <span>💻 github.com/yourprofile</span>
-                    </div>
+                <div class="download-resume" style="margin-bottom: 2rem;">
+                    <button class="download-btn" id="download-resume-btn">⬇️ Download Resume (PDF)</button>
                 </div>
-
-                <div class="resume-section">
-                    <h4>Skills & Technologies</h4>
-                    <div class="skills-grid">
-                        <div class="skill-category">
-                            <h5>Frontend</h5>
-                            <p>React, Vue.js, Angular, HTML5, CSS3, JavaScript, TypeScript</p>
-                        </div>
-                        <div class="skill-category">
-                            <h5>Backend</h5>
-                            <p>Node.js, Python, Java, C#, Go, Ruby on Rails</p>
-                        </div>
-                        <div class="skill-category">
-                            <h5>Databases</h5>
-                            <p>PostgreSQL, MongoDB, MySQL, Redis, Elasticsearch</p>
-                        </div>
-                        <div class="skill-category">
-                            <h5>DevOps</h5>
-                            <p>Docker, Kubernetes, AWS, Azure, CI/CD, Terraform</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="resume-section">
-                    <h4>Education</h4>
-                    <div class="education-item">
-                        <h5>Bachelor of Science in Computer Science</h5>
-                        <p>University Name | 2016 - 2020</p>
-                        <p>GPA: 3.8/4.0 | Dean's List</p>
-                    </div>
-                </div>
-
-                <div class="resume-section">
-                    <h4>Certifications</h4>
-                    <ul>
-                        <li>AWS Certified Solutions Architect</li>
-                        <li>Google Cloud Professional Developer</li>
-                        <li>Certified Kubernetes Administrator (CKA)</li>
-                    </ul>
-                </div>
-
-                <div class="download-resume">
-                    <button class="download-btn">⬇️ Download Full Resume (PDF)</button>
+                
+                <!-- PDF Embed -->
+                <div class="pdf-container">
+                    <embed src="files/Donovan_Hsiao_resume.pdf" type="application/pdf" width="100%" height="800px" />
+                    <p class="pdf-fallback">
+                        If the PDF doesn't display, 
+                        <a href="files/Donovan_Hsiao_resume.pdf" target="_blank" class="pdf-link">click here to open it in a new tab</a>.
+                    </p>
                 </div>
             </div>
             <button class="back-btn" onclick="showHero()">← Back to Home</button>
