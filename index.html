@@ -1,216 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StreamDev - Live Developer Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="logo">
-                <span class="stream">Stream</span><span class="dev">Dev</span>
-                <span class="live-indicator">🔴 LIVE</span>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Donovan Hsiao — Software Engineer</title>
+        <link rel="stylesheet" href="styles.css" />
+        <!-- small YAML parser for client-side config -->
+        <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <div class="brand">
+                    <h1 id="site-name">Donovan Hsiao</h1>
+                    <p id="site-title">Software Engineer</p>
+                </div>
+                <nav class="main-nav" aria-label="Main navigation">
+                    <button class="nav-btn" data-section="home">Home</button>
+                    <button class="nav-btn" data-section="experience">Experience</button>
+                    <button class="nav-btn" data-section="projects">Projects</button>
+                    <button class="nav-btn" data-section="resume">Resume</button>
+                    <button class="nav-btn" data-section="contact">Contact</button>
+                </nav>
             </div>
-            <nav>
-                <a href="#" class="nav-link" data-section="experience">Experience</a>
-                <a href="#" class="nav-link" data-section="projects">Projects</a>
-                <a href="#" class="nav-link" data-section="resume">Resume</a>
-            </nav>
-        </div>
-    </header>
+        </header>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Welcome to StreamDev</h1>
-                <p class="tagline">Your #1 source for premium developer content</p>
-                <div class="warning-banner">
-                    ⚠️ Warning: This site may contain popup ads. Click at your own risk!
-                </div>
-                <div class="featured-links">
-                    <button class="featured-btn" data-section="experience">
-                        <span class="btn-label">🎯 Featured</span>
-                        <span class="btn-title">Work Experience</span>
-                        <span class="btn-viewers">👁 Click to view</span>
-                    </button>
-                    <button class="featured-btn" data-section="projects">
-                        <span class="btn-label">🔥 Hot</span>
-                        <span class="btn-title">Project Highlights</span>
-                        <span class="btn-viewers">👁 Click to view</span>
-                    </button>
-                    <button class="featured-btn" data-section="resume">
-                        <span class="btn-label">📄 Premium</span>
-                        <span class="btn-title">Full Resume</span>
-                        <span class="btn-viewers">👁 Click to view</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Popup Ad Overlay -->
-    <div id="popup-overlay" class="popup-overlay">
-        <div class="popup-ad">
-            <button class="close-btn" id="close-popup">✕</button>
-            <div class="popup-content" id="popup-content">
-                <!-- Dynamic content will be inserted here -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Content Sections (Hidden by default) -->
-    <section id="experience-section" class="content-section">
-        <div class="container">
-            <h2>💼 Work Experience</h2>
-            <div class="section-content">
-                <div class="experience-item">
-                    <div class="exp-header">
-                        <h3>Senior Software Engineer</h3>
-                        <span class="exp-date">2023 - Present</span>
-                    </div>
-                    <h4>Tech Innovations Inc.</h4>
-                    <ul>
-                        <li>Led development of microservices architecture serving 1M+ users</li>
-                        <li>Reduced API response time by 60% through optimization</li>
-                        <li>Mentored team of 5 junior developers</li>
-                        <li>Implemented CI/CD pipeline reducing deployment time by 80%</li>
-                    </ul>
-                </div>
-                <div class="experience-item">
-                    <div class="exp-header">
-                        <h3>Full Stack Developer</h3>
-                        <span class="exp-date">2021 - 2023</span>
-                    </div>
-                    <h4>StartupXYZ</h4>
-                    <ul>
-                        <li>Built responsive web applications using React and Node.js</li>
-                        <li>Designed and implemented RESTful APIs</li>
-                        <li>Collaborated with UX team to improve user engagement by 45%</li>
-                        <li>Integrated third-party payment systems and analytics</li>
-                    </ul>
-                </div>
-                <div class="experience-item">
-                    <div class="exp-header">
-                        <h3>Software Engineer Intern</h3>
-                        <span class="exp-date">2020 - 2021</span>
-                    </div>
-                    <h4>Big Tech Corp</h4>
-                    <ul>
-                        <li>Developed internal tools for data analysis and reporting</li>
-                        <li>Participated in agile development processes</li>
-                        <li>Contributed to open-source projects</li>
-                    </ul>
-                </div>
-            </div>
-            <button class="back-btn" onclick="showHero()">← Back to Home</button>
-        </div>
-    </section>
-
-    <section id="projects-section" class="content-section">
-        <div class="container">
-            <h2>🚀 Featured Projects</h2>
-            <div class="section-content">
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>E-Commerce Platform</h3>
-                        <div class="project-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">Node.js</span>
-                            <span class="tag">MongoDB</span>
+        <main class="site-main">
+            <section id="home" class="page active">
+                <div class="container hero">
+                    <div class="hero-left">
+                        <h2 id="hero-greeting">Hi, I'm Donovan.</h2>
+                        <p id="hero-tagline">I build reliable, maintainable systems and delightful user experiences.</p>
+                        <div class="cta-row">
+                            <button class="primary-cta nav-btn" data-section="projects" onClick="window.open('https://www.github.com/donovanhsiao', '_blank')">See Projects</button>
+                            <button class="secondary-cta nav-btn" data-section="resume" onClick="window.open('files/Donovan_Hsiao_resume.pdf', '_blank')">View Resume</button>
                         </div>
                     </div>
-                    <p>Full-stack e-commerce solution with real-time inventory management, payment processing, and admin dashboard.</p>
-                    <ul>
-                        <li>10,000+ products managed</li>
-                        <li>Secure payment integration</li>
-                        <li>Real-time analytics dashboard</li>
-                    </ul>
-                </div>
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>AI Chat Application</h3>
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">TensorFlow</span>
-                            <span class="tag">WebSocket</span>
+                    <div class="hero-right" id="hero-right">
+                        <!-- optional headshot or graphic can go here -->
+                        <div class="profile-card">
+                            <div class="avatar" aria-hidden="true">DH</div>
+                            <div class="profile-meta">
+                                <h3 id="profile-name">Donovan Hsiao</h3>
+                                <p id="profile-title">Software Engineer</p>
+                            </div>
                         </div>
                     </div>
-                    <p>Real-time chat application with AI-powered message suggestions and sentiment analysis.</p>
-                    <ul>
-                        <li>Natural language processing</li>
-                        <li>Real-time communication</li>
-                        <li>Custom ML model training</li>
-                    </ul>
                 </div>
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>DevOps Automation Suite</h3>
-                        <div class="project-tags">
-                            <span class="tag">Docker</span>
-                            <span class="tag">Kubernetes</span>
-                            <span class="tag">Terraform</span>
-                        </div>
-                    </div>
-                    <p>Automated deployment and monitoring system for cloud infrastructure.</p>
-                    <ul>
-                        <li>Infrastructure as Code</li>
-                        <li>Automated testing & deployment</li>
-                        <li>Cost optimization algorithms</li>
-                    </ul>
+            </section>
+
+            <section id="experience" class="page">
+                <div class="container">
+                    <h2>Experience</h2>
+                    <div id="experience-list" class="grid"></div>
                 </div>
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Mobile Fitness Tracker</h3>
-                        <div class="project-tags">
-                            <span class="tag">React Native</span>
-                            <span class="tag">Firebase</span>
-                            <span class="tag">HealthKit</span>
-                        </div>
-                    </div>
-                    <p>Cross-platform mobile app for tracking workouts, nutrition, and health metrics.</p>
-                    <ul>
-                        <li>Cross-platform compatibility</li>
-                        <li>Real-time data synchronization</li>
-                        <li>Social features & challenges</li>
-                    </ul>
+            </section>
+
+            <section id="projects" class="page">
+                <div class="container">
+                    <h2>Projects</h2>
+                    <div id="projects-list" class="grid"></div>
                 </div>
+            </section>
+
+            <section id="resume" class="page">
+                <div class="container">
+                    <h2>Resume</h2>
+                    <div id="resume-view" class="resume-view"></div>
+                </div>
+            </section>
+
+            <section id="contact" class="page">
+                <div class="container">
+                    <h2>Contact</h2>
+                    <div id="contact-view" class="card"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container footer-inner">
+                <p id="footer-text">© <span id="footer-year"></span> Donovan Hsiao</p>
             </div>
-            <button class="back-btn" onclick="showHero()">← Back to Home</button>
-        </div>
-    </section>
+        </footer>
 
-    <section id="resume-section" class="content-section">
-        <div class="container">
-            <h2>📄 Resume</h2>
-            <div class="section-content">
-                <div class="download-resume" style="margin-bottom: 2rem;">
-                    <button class="download-btn" id="download-resume-btn">⬇️ Download Resume (PDF)</button>
-                </div>
-                
-                <!-- PDF Embed -->
-                <div class="pdf-container">
-                    <embed src="files/Donovan_Hsiao_resume.pdf" type="application/pdf" width="100%" height="800px" />
-                    <p class="pdf-fallback">
-                        If the PDF doesn't display, 
-                        <a href="files/Donovan_Hsiao_resume.pdf" target="_blank" class="pdf-link">click here to open it in a new tab</a>.
-                    </p>
-                </div>
-            </div>
-            <button class="back-btn" onclick="showHero()">← Back to Home</button>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>© 2025 StreamDev. All rights reserved. | Not actually illegal, just themed that way 😉</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+        <script src="script.js"></script>
+        </body>
+    </html>

@@ -1,242 +1,122 @@
-// Popup Ad System
-let clickCount = 0;
-let targetSection = null;
+// script.js — lightweight portfolio renderer
+// Fetches `configure.yaml` and renders the site dynamically.
 
-// Random popup ad content
-const popupAds = [
-    {
-        title: "🎰 WIN BIG NOW!",
-        content: `
-            <div class="ad-content">
-                <h3>CONGRATULATIONS! You're our 1,000,000th visitor!</h3>
-                <p>Click below to claim your prize of $1,000,000!</p>
-                <div style="font-size: 4rem; margin: 2rem 0;">💰💎🎁</div>
-                <button class="ad-cta">CLAIM NOW!</button>
-                <p style="font-size: 0.8rem; margin-top: 1rem; color: #999;">
-                    *Just kidding, this is a fake ad. Close to continue!
-                </p>
-            </div>
-        `
-    },
-    {
-        title: "🔥 HOT SINGLES IN YOUR AREA",
-        content: `
-            <div class="ad-content">
-                <h3>Hot Developers Near You!</h3>
-                <p>127 senior engineers are waiting to pair program with you!</p>
-                <div style="font-size: 4rem; margin: 2rem 0;">👨‍💻💕👩‍💻</div>
-                <button class="ad-cta">MEET THEM NOW</button>
-                <p style="font-size: 0.8rem; margin-top: 1rem; color: #999;">
-                    *This is satire. Close to view actual content.
-                </p>
-            </div>
-        `
-    },
-    {
-        title: "⚡ UNLIMITED POWER",
-        content: `
-            <div class="ad-content">
-                <h3>Download More RAM!</h3>
-                <p>Your computer is running slow! Download 32GB of RAM for FREE!</p>
-                <div style="font-size: 4rem; margin: 2rem 0;">💾⚡🚀</div>
-                <button class="ad-cta">DOWNLOAD RAM</button>
-                <p style="font-size: 0.8rem; margin-top: 1rem; color: #999;">
-                    *Obviously fake. Close this popup ad!
-                </p>
-            </div>
-        `
-    },
-    {
-        title: "🎮 PLAY NOW",
-        content: `
-            <div class="ad-content">
-                <h3>THIS GAME WILL MAKE YOU CRY!</h3>
-                <p>97% of players can't reach level 2!</p>
-                <div style="font-size: 4rem; margin: 2rem 0;">🎮😭🏆</div>
-                <button class="ad-cta">PLAY FREE NOW</button>
-                <p style="font-size: 0.8rem; margin-top: 1rem; color: #999;">
-                    *Fake mobile game ad. Close to continue browsing!
-                </p>
-            </div>
-        `
-    },
-    {
-        title: "💊 DOCTORS HATE HIM",
-        content: `
-            <div class="ad-content">
-                <h3>Learn to Code in 5 Minutes!</h3>
-                <p>This one weird trick will make you a senior developer instantly!</p>
-                <div style="font-size: 4rem; margin: 2rem 0;">📚🧠💡</div>
-                <button class="ad-cta">LEARN THE SECRET</button>
-                <p style="font-size: 0.8rem; margin-top: 1rem; color: #999;">
-                    *Spoiler: Practice and time. Close this ad!
-                </p>
-            </div>
-        `
-    },
-    {
-        title: "🛡️ VIRUS ALERT",
-        content: `
-            <div class="ad-content">
-                <h3 style="color: #ff2e63;">⚠️ WARNING: VIRUS DETECTED!</h3>
-                <p>Your computer has 47 viruses! Click to remove them now!</p>
-                <div style="font-size: 4rem; margin: 2rem 0;">🦠🚨💻</div>
-                <button class="ad-cta">REMOVE VIRUSES</button>
-                <p style="font-size: 0.8rem; margin-top: 1rem; color: #999;">
-                    *Classic fake antivirus ad. You're safe, just close this!
-                </p>
-            </div>
-        `
-    }
-];
-
-// Get random ad content
-function getRandomAd() {
-    const randomIndex = Math.floor(Math.random() * popupAds.length);
-    return popupAds[randomIndex];
-}
-
-// Show popup ad
-function showPopup(section) {
-    targetSection = section;
-    const popup = document.getElementById('popup-overlay');
-    const popupContent = document.getElementById('popup-content');
-    
-    const ad = getRandomAd();
-    
-    popupContent.innerHTML = ad.content;
-    
-    popup.classList.add('active');
-    
-    // Prevent body scroll when popup is open
-    document.body.style.overflow = 'hidden';
-}
-
-// Close popup
-function closePopup() {
-    const popup = document.getElementById('popup-overlay');
-    popup.classList.remove('active');
-    document.body.style.overflow = 'auto';
-    
-    clickCount++;
-    targetSection = null;
-}
-
-// Show hero section
-function showHero() {
-    // Hide all content sections
-    document.querySelectorAll('.content-section').forEach(section => {
-        section.classList.remove('active');
-    });
-    
-    // Show hero
-    document.getElementById('hero').style.display = 'flex';
-    
-    // Reset ad counter when returning to homepage
-    clickCount = 0;
-    
-    // Scroll to top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// Show specific section
-function showSection(sectionName) {
-    // Hide hero
-    document.getElementById('hero').style.display = 'none';
-    
-    // Hide all content sections
-    document.querySelectorAll('.content-section').forEach(section => {
-        section.classList.remove('active');
-    });
-    
-    // Show target section
-    const targetElement = document.getElementById(`${sectionName}-section`);
-    if (targetElement) {
-        targetElement.classList.add('active');
-        // Scroll to top of section
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-}
-
-// Handle navigation clicks
-function handleNavClick(e) {
-    e.preventDefault();
-    const section = e.currentTarget.dataset.section;
-    
-    // If user has already closed 2 ads, go directly to the section
-    if (clickCount >= 2) {
-        showSection(section);
-    } else {
-        // Show popup ad
-        showPopup(section);
-    }
-}
-
-// Initialize event listeners
 document.addEventListener('DOMContentLoaded', () => {
-    // Add click handlers to all navigation links and featured buttons
-    const navLinks = document.querySelectorAll('.nav-link, .featured-btn');
-    navLinks.forEach(link => {
-        link.addEventListener('click', handleNavClick);
-    });
-    
-    // Close popup button
-    document.getElementById('close-popup').addEventListener('click', closePopup);
-    
-    // Close popup when clicking outside
-    document.getElementById('popup-overlay').addEventListener('click', (e) => {
-        if (e.target.id === 'popup-overlay') {
-            closePopup();
-        }
-    });
-    
-    // Prevent clicks on popup content from closing the popup
-    document.querySelector('.popup-ad').addEventListener('click', (e) => {
-        e.stopPropagation();
-    });
-    
-    // Handle fake ad CTA buttons
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('ad-cta')) {
-            e.preventDefault();
-            alert('Nice try! Close the popup to continue 😄');
-        }
-    });
-    
-    // Download resume button
-    document.getElementById('download-resume-btn').addEventListener('click', () => {
-        const link = document.createElement('a');
-        link.href = 'files/Donovan_Hsiao_resume.pdf';
-        link.download = 'Donovan_Hsiao_resume.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    });
+  fetch('configure.yaml')
+    .then((res) => res.text())
+    .then((yaml) => {
+      const data = jsyaml.load(yaml);
+      initSite(data);
+    })
+    .catch((err) => console.error('Failed to load configure.yaml', err));
 });
 
-// Add some Easter eggs
-let konamiCode = [];
-const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+function initSite(data) {
+  // Header & hero
+  document.getElementById('site-name').textContent = data.personalInfo.name || 'Your Name';
+  document.getElementById('site-title').textContent = data.personalInfo.title || '';
+  document.getElementById('profile-name').textContent = data.personalInfo.name || '';
+  document.getElementById('profile-title').textContent = data.personalInfo.title || '';
+  document.getElementById('hero-greeting').textContent = `Hi, I'm ${data.personalInfo.name.split(' ')[0] || 'there'}.`;
+  document.getElementById('hero-tagline').textContent = data.personalInfo.title || '';
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-document.addEventListener('keydown', (e) => {
-    konamiCode.push(e.key);
-    konamiCode = konamiCode.slice(-10);
-    
-    if (konamiCode.join('') === konamiSequence.join('')) {
-        alert('🎮 Konami Code activated! You found the Easter egg! 🎉');
-        document.body.style.animation = 'spin 2s ease-in-out';
-        setTimeout(() => {
-            document.body.style.animation = '';
-        }, 2000);
-    }
-});
+  // Experience
+  const expContainer = document.getElementById('experience-list');
+  expContainer.innerHTML = (data.experience || [])
+    .map((item) => {
+      return `
+        <div class="card">
+          <h3>${escapeHtml(item.title)} <span style="color:var(--muted);font-weight:600">— ${escapeHtml(item.company)}</span></h3>
+          <p style="color:var(--muted);margin-bottom:8px">${escapeHtml(item.date)}</p>
+          <ul>${(item.duties || []).map((d) => `<li style="color:var(--muted);margin-bottom:6px">${escapeHtml(d)}</li>`).join('')}</ul>
+        </div>
+      `;
+    })
+    .join('');
 
-// Add spin animation for Easter egg
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-`;
-document.head.appendChild(style);
+  // Projects
+  const projContainer = document.getElementById('projects-list');
+  projContainer.innerHTML = (data.projects || [])
+    .map((p) => {
+      return `
+        <div class="card">
+          <h3>${escapeHtml(p.title)}</h3>
+          <p style="color:var(--muted);margin-bottom:8px">${escapeHtml(p.description)}</p>
+          <div style="margin-bottom:10px">${(p.tags || [])
+            .map((t) => `<span style="display:inline-block;background:rgba(124,58,237,0.08);color:var(--text);padding:6px 10px;border-radius:999px;margin-right:6px;font-size:0.82rem">${escapeHtml(t)}</span>`)
+            .join('')}</div>
+          <ul>${(p.features || []).map((f) => `<li style="color:var(--muted);margin-bottom:6px">${escapeHtml(f)}</li>`).join('')}</ul>
+        </div>
+      `;
+    })
+    .join('');
+
+  // Resume
+  const resumeView = document.getElementById('resume-view');
+  resumeView.innerHTML = `
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <h3 style="margin:0">${escapeHtml(data.personalInfo.name)}</h3>
+          <p style="margin:0;color:var(--muted)">${escapeHtml(data.personalInfo.title)}</p>
+        </div>
+        <div style="display:flex;gap:8px">
+          <a class="primary-cta" href="${escapeAttr(data.personalInfo.resumePdf)}" target="_blank" rel="noopener">Open PDF</a>
+          <button id="download-resume" class="secondary-cta">Download</button>
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <embed src="${escapeAttr(data.personalInfo.resumePdf)}" type="application/pdf" width="100%" height="720px" />
+      </div>
+    </div>
+  `;
+
+  document.getElementById('download-resume').addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.href = data.personalInfo.resumePdf;
+    link.download = data.personalInfo.resumePdf.split('/').pop();
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+
+  // Contact
+  const contactView = document.getElementById('contact-view');
+  contactView.innerHTML = `
+    <div class="card">
+      <h3>Contact</h3>
+      <p style="color:var(--muted)">Email: <a href="mailto:${escapeAttr(data.personalInfo.contact.email)}">${escapeHtml(data.personalInfo.contact.email)}</a></p>
+      <p style="color:var(--muted)">LinkedIn: <a href="https://${escapeAttr(data.personalInfo.contact.linkedin)}" target="_blank" rel="noopener">${escapeHtml(data.personalInfo.contact.linkedin)}</a></p>
+      <p style="color:var(--muted)">GitHub: <a href="https://${escapeAttr(data.personalInfo.contact.github)}" target="_blank" rel="noopener">${escapeHtml(data.personalInfo.contact.github)}</a></p>
+    </div>
+  `;
+
+  // Navigation wiring
+  document.querySelectorAll('.nav-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => navigateTo(e.currentTarget.dataset.section));
+  });
+
+  const hash = location.hash.replace('#', '');
+  if (hash && document.getElementById(hash)) navigateTo(hash);
+  else navigateTo('home');
+}
+
+function navigateTo(sectionId) {
+  document.querySelectorAll('.page').forEach((p) => p.classList.remove('active'));
+  const el = document.getElementById(sectionId);
+  if (el) el.classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach((b) => b.classList.toggle('active', b.dataset.section === sectionId));
+  history.replaceState(null, '', `#${sectionId}`);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/[&<>"']/g, (s) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
+}
+
+function escapeAttr(str) {
+  if (!str) return '';
+  return encodeURI(String(str));
+}
